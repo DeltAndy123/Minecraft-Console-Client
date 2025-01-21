@@ -58,6 +58,12 @@ namespace MinecraftClient.ChatBots
             [TomlInlineComment("$ChatBot.DiscordBridge.MessageSendTimeout$")]
             public int Message_Send_Timeout = 3;
 
+            [TomlPrecedingComment("$ChatBot.DiscordBridge.FilterMode$")]
+            public string FilterMode = "none";
+
+            [TomlPrecedingComment("$ChatBot.DiscordBridge.FilterRegex$")]
+            public string FilterRegex = "";
+
             [TomlPrecedingComment("$ChatBot.DiscordBridge.Formats$")]
             public string PrivateMessageFormat = "**[Private Message]** {username}: {message}";
             public string PublicMessageFormat = "{username}: {message}";
@@ -183,6 +189,18 @@ namespace MinecraftClient.ChatBots
                 return;
 
             text = GetVerbatim(text).Trim();
+
+            // Filter the message
+            if (Config.FilterMode == "whitelist")
+            {
+                if (!System.Text.RegularExpressions.Regex.IsMatch(text, Config.FilterRegex))
+                    return;
+            }
+            else if (Config.FilterMode == "blacklist")
+            {
+                if (System.Text.RegularExpressions.Regex.IsMatch(text, Config.FilterRegex))
+                    return;
+            }
 
             // Stop the crash when an empty text is recived somehow
             if (string.IsNullOrEmpty(text))

@@ -390,6 +390,12 @@ For Discord message formatting, check the following: https://mccteam.github.io/r
   <data name="ChatBot.DiscordBridge.Token" xml:space="preserve">
     <value>Your Discord Bot token.</value>
   </data>
+  <data name="ChatBot.DiscordBridge.FilterMode" xml:space="preserve">
+    <value>Filter mode for messages sent to Discord. "none" will send all messages, "whitelist" will only send messages that match the whitelist, "blacklist" will send all messages except those that match the blacklist.</value>
+  </data>
+  <data name="ChatBot.DiscordBridge.FilterRegex" xml:space="preserve">
+      <value>Regex pattern for filtering messages sent to Discord. Only used when FilterMode is set to "whitelist" or "blacklist".</value>
+  </data>
   <data name="ChatBot.Farmer" xml:space="preserve">
     <value>Automatically farms crops for you (plants, breaks and bonemeals them).
 Crop types available: Beetroot, Carrot, Melon, Netherwart, Pumpkin, Potato, Wheat.
